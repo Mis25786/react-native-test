@@ -9,6 +9,8 @@ import {
 } from "react-native";
 
 export default function App() {
+  console.log(Platform.OS);
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -46,6 +48,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    // justifyContent: "flex-end",
     justifyContent: "center",
     resizeMode: "cover",
     // alignItems: "center",
@@ -66,16 +69,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   btn: {
-    backgroundColor: "#1E90FF",
+    backgroundColor: Platform.OS === "ios" ? "transparent" : "#1E90FF",
     height: 40,
     borderRadius: 6,
+    borderWidth: 1,
+    borderColor: Platform.OS === "ios" ? "#FFFFFF" : "transparent",
     marginTop: 40,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 100,
   },
   btnTitle: {
-    color: "#FFFFFF",
+    color: Platform.OS === "ios" ? "#1E90FF " : "#FFFFFF",
     fontSize: 12,
   },
 });
