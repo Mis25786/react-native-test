@@ -5,7 +5,7 @@ import {
   Text,
   View,
   TextInput,
-  Button,
+  TouchableOpacity,
 } from "react-native";
 
 export default function App() {
@@ -24,7 +24,9 @@ export default function App() {
             <Text style={styles.inputTitle}>PASSWORD</Text>
             <TextInput style={styles.input} secureTextEntry={true} />
           </View>
-          <Button title="SIGN IN" />
+          <TouchableOpacity style={styles.btn} activeOpacity={0.8}>
+            <Text style={styles.btnTitle}>SIGN IN</Text>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     </View>
@@ -61,6 +63,19 @@ const styles = StyleSheet.create({
   inputTitle: {
     color: "#FFFFFF",
     marginBottom: 10,
+    fontSize: 12,
+  },
+  btn: {
+    backgroundColor: "#1E90FF",
+    height: 40,
+    borderRadius: 6,
+    marginTop: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 100,
+  },
+  btnTitle: {
+    color: "#FFFFFF",
     fontSize: 12,
   },
 });
