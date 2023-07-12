@@ -8,12 +8,18 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Keyboard,
 } from "react-native";
 
 export default function App() {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   console.log(isShowKeyboard);
+
+  const keyboardHide = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+  };
 
   return (
     <View style={styles.container}>
@@ -45,7 +51,11 @@ export default function App() {
                 onFocus={() => setIsShowKeyboard(true)}
               />
             </View>
-            <TouchableOpacity style={styles.btn} activeOpacity={0.8}>
+            <TouchableOpacity
+              style={styles.btn}
+              activeOpacity={0.8}
+              onPress={keyboardHide}
+            >
               <Text style={styles.btnTitle}>SIGN IN</Text>
             </TouchableOpacity>
           </View>
@@ -68,8 +78,8 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: "flex-end",
-    // justifyContent: "center",
+    // justifyContent: "flex-end",
+    justifyContent: "center",
     resizeMode: "cover",
     // alignItems: "center",
   },
