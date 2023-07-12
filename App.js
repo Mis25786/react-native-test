@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TextInput,
+  Button,
 } from "react-native";
 
 export default function App() {
@@ -14,7 +15,17 @@ export default function App() {
         style={styles.image}
         source={require("./image/fentezi.jpg")}
       >
-        <TextInput style={styles.input} />
+        <View style={styles.form}>
+          <View>
+            <Text style={styles.inputTitle}>EMAIL ADDRES</Text>
+            <TextInput style={styles.input} />
+          </View>
+          <View style={{ marginTop: 20 }}>
+            <Text style={styles.inputTitle}>PASSWORD</Text>
+            <TextInput style={styles.input} secureTextEntry={true} />
+          </View>
+          <Button title="SIGN IN" />
+        </View>
       </ImageBackground>
     </View>
   );
@@ -41,8 +52,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#FFFFFF",
     borderRadius: 6,
-    marginHorizontal: 20,
     color: "#FFFFFF",
     textAlign: "center",
+  },
+  form: {
+    marginHorizontal: 40,
+  },
+  inputTitle: {
+    color: "#FFFFFF",
+    marginBottom: 10,
+    fontSize: 12,
   },
 });
