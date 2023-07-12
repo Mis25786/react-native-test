@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 export default function App() {
@@ -22,46 +23,53 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        style={styles.image}
-        source={require("./image/fentezi.jpg")}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+    <TouchableWithoutFeedback onPress={keyboardHide}>
+      <View style={styles.container}>
+        <ImageBackground
+          style={styles.image}
+          source={require("./image/fentezi.jpg")}
         >
-          <View
-            style={{
-              ...styles.form,
-              marginBottom: isShowKeyboard ? 20 : 100,
-            }}
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
-            <View>
-              <Text style={styles.inputTitle}>EMAIL ADDRES</Text>
-              <TextInput
-                style={styles.input}
-                onFocus={() => setIsShowKeyboard(true)}
-              />
-            </View>
-            <View style={{ marginTop: 20 }}>
-              <Text style={styles.inputTitle}>PASSWORD</Text>
-              <TextInput
-                style={styles.input}
-                secureTextEntry={true}
-                onFocus={() => setIsShowKeyboard(true)}
-              />
-            </View>
-            <TouchableOpacity
-              style={styles.btn}
-              activeOpacity={0.8}
-              onPress={keyboardHide}
+            <View
+              style={{
+                ...styles.form,
+                marginBottom: isShowKeyboard ? 20 : 100,
+              }}
             >
-              <Text style={styles.btnTitle}>SIGN IN</Text>
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
-      </ImageBackground>
-    </View>
+              <View style={styles.header}>
+                <Text style={styles.headerTitle}>Hello again</Text>
+                <Text style={styles.headerTitle}>Welcome back</Text>
+              </View>
+
+              <View>
+                <Text style={styles.inputTitle}>EMAIL ADDRES</Text>
+                <TextInput
+                  style={styles.input}
+                  onFocus={() => setIsShowKeyboard(true)}
+                />
+              </View>
+              <View style={{ marginTop: 20 }}>
+                <Text style={styles.inputTitle}>PASSWORD</Text>
+                <TextInput
+                  style={styles.input}
+                  secureTextEntry={true}
+                  onFocus={() => setIsShowKeyboard(true)}
+                />
+              </View>
+              <TouchableOpacity
+                style={styles.btn}
+                activeOpacity={0.8}
+                onPress={keyboardHide}
+              >
+                <Text style={styles.btnTitle}>SIGN IN</Text>
+              </TouchableOpacity>
+            </View>
+          </KeyboardAvoidingView>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -78,9 +86,9 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    // justifyContent: "flex-end",
-    justifyContent: "center",
     resizeMode: "cover",
+    justifyContent: "center",
+    // justifyContent: "flex-end",
     // alignItems: "center",
   },
   input: {
@@ -121,5 +129,13 @@ const styles = StyleSheet.create({
   btnTitle: {
     color: Platform.OS === "ios" ? "#1E90FF " : "#FFFFFF",
     fontSize: 12,
+  },
+  header: {
+    alignItems: "center",
+    marginBottom: 100,
+  },
+  headerTitle: {
+    fontSize: 30,
+    color: "#FFFFFF",
   },
 });
