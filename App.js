@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Platform,
   ImageBackground,
@@ -6,10 +7,13 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 
 export default function App() {
   console.log(Platform.OS);
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  console.log(isShowKeyboard);
 
   return (
     <View style={styles.container}>
@@ -17,19 +21,35 @@ export default function App() {
         style={styles.image}
         source={require("./image/fentezi.jpg")}
       >
-        <View style={styles.form}>
-          <View>
-            <Text style={styles.inputTitle}>EMAIL ADDRES</Text>
-            <TextInput style={styles.input} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <View
+            style={{
+              ...styles.form,
+              marginBottom: isShowKeyboard ? 20 : 100,
+            }}
+          >
+            <View>
+              <Text style={styles.inputTitle}>EMAIL ADDRES</Text>
+              <TextInput
+                style={styles.input}
+                onFocus={() => setIsShowKeyboard(true)}
+              />
+            </View>
+            <View style={{ marginTop: 20 }}>
+              <Text style={styles.inputTitle}>PASSWORD</Text>
+              <TextInput
+                style={styles.input}
+                secureTextEntry={true}
+                onFocus={() => setIsShowKeyboard(true)}
+              />
+            </View>
+            <TouchableOpacity style={styles.btn} activeOpacity={0.8}>
+              <Text style={styles.btnTitle}>SIGN IN</Text>
+            </TouchableOpacity>
           </View>
-          <View style={{ marginTop: 20 }}>
-            <Text style={styles.inputTitle}>PASSWORD</Text>
-            <TextInput style={styles.input} secureTextEntry={true} />
-          </View>
-          <TouchableOpacity style={styles.btn} activeOpacity={0.8}>
-            <Text style={styles.btnTitle}>SIGN IN</Text>
-          </TouchableOpacity>
-        </View>
+        </KeyboardAvoidingView>
       </ImageBackground>
     </View>
   );
@@ -48,8 +68,8 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    // justifyContent: "flex-end",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+    // justifyContent: "center",
     resizeMode: "cover",
     // alignItems: "center",
   },
