@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
+  TextInput,
 } from "react-native";
 
 export default function App() {
@@ -13,9 +14,7 @@ export default function App() {
         style={styles.image}
         source={require("./image/fentezi.jpg")}
       >
-        <View style={styles.innerBox}>
-          <Text style={styles.text}>TEST PROJECT!</Text>
-        </View>
+        <TextInput style={styles.input} />
       </ImageBackground>
     </View>
   );
@@ -29,18 +28,21 @@ const styles = StyleSheet.create({
     // alignItems: "center",
   },
   text: {
-    color: "white",
+    color: "#ffffff",
     fontSize: 30,
-  },
-  innerBox: {
-    borderWidth: 1,
-    borderColor: "pink",
-    padding: 20,
-    borderRadius: 10,
   },
   image: {
     flex: 1,
     justifyContent: "center",
     resizeMode: "cover",
+    // alignItems: "center",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#FFFFFF",
+    borderRadius: 6,
+    marginHorizontal: 20,
+    color: "#FFFFFF",
+    textAlign: "center",
   },
 });
