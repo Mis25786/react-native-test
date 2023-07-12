@@ -12,14 +12,22 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
+const initialState = {
+  email: "",
+  password: "",
+};
+
 export default function App() {
-  console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-  console.log(isShowKeyboard);
+  // console.log(isShowKeyboard);
+  const [state, setstate] = useState(initialState);
+  // console.log(state);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
+    console.log(state);
+    setstate(initialState);
   };
 
   return (
@@ -48,6 +56,10 @@ export default function App() {
                 <TextInput
                   style={styles.input}
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.email}
+                  onChangeText={(value) =>
+                    setstate((prevState) => ({ ...prevState, email: value }))
+                  }
                 />
               </View>
               <View style={{ marginTop: 20 }}>
@@ -56,6 +68,10 @@ export default function App() {
                   style={styles.input}
                   secureTextEntry={true}
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.password}
+                  onChangeText={(value) =>
+                    setstate((prevState) => ({ ...prevState, password: value }))
+                  }
                 />
               </View>
               <TouchableOpacity
