@@ -17,9 +17,10 @@ import {
 const initialState = {
   email: "",
   password: "",
+  nickname: "",
 };
 
-export default function LoginScreen() {
+export default function RegisterScreen() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
   const [dimensions, setDimensions] = useState(
@@ -63,11 +64,22 @@ export default function LoginScreen() {
               }}
             >
               <View style={styles.header}>
-                <Text style={styles.headerTitle}>Hello again</Text>
-                <Text style={styles.headerTitle}>Welcome back</Text>
+                <Text style={styles.headerTitle}>Hello</Text>
+                <Text style={styles.headerTitle}>Sign up to get started </Text>
               </View>
 
               <View>
+                <Text style={styles.inputTitle}>NICKNAME</Text>
+                <TextInput
+                  style={styles.input}
+                  onFocus={() => setIsShowKeyboard(true)}
+                  value={state.nickname}
+                  onChangeText={(value) =>
+                    setstate((prevState) => ({ ...prevState, nickname: value }))
+                  }
+                />
+              </View>
+              <View style={{ marginTop: 20 }}>
                 <Text style={styles.inputTitle}>EMAIL ADDRES</Text>
                 <TextInput
                   style={styles.input}

@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 //* import { AppLoading } from "expo";
 
 import LoginScreen from "./screens/auth/LoginScreen";
+import RegisterScreen from "./screens/auth/RegisterScreen";
 
 //* const loadApplication = async () => {
 //*   await Font.loadAsync({
@@ -34,7 +35,8 @@ export default function App() {
 
   return (
     <>
-      <LoginScreen />
+      {/* <LoginScreen /> */}
+      <RegisterScreen />
     </>
   );
 }
