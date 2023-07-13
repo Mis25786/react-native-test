@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFonts } from "expo-font";
 //* import * as Font from "expo-font";
 //* import { AppLoading } from "expo";
@@ -13,6 +13,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
+  Dimensions,
 } from "react-native";
 
 const initialState = {
@@ -35,6 +36,22 @@ export default function App() {
     "DMMono-Medium": require("./assets/Fonts/DMMono-Medium.ttf"),
     "DMMono-Light": require("./assets/Fonts/DMMono-Light.ttf"),
   });
+  const [dimensions, setDimensions] = useState(
+    Dimensions.get("window").width - 20 * 2
+  );
+
+  useEffect(() => {
+    const onChange = () => {
+      const width = Dimensions.get("window").width - 20 * 2;
+      setDimensions(width);
+      console.log("width", width);
+    };
+    Dimensions.addEventListener("change", onChange);
+
+    return () => {
+      Dimensions.removeEventListener("change", onChange);
+    };
+  }, []);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -69,6 +86,7 @@ export default function App() {
               style={{
                 ...styles.form,
                 marginBottom: isShowKeyboard ? 20 : 100,
+                width: dimensions,
               }}
             >
               <View style={styles.header}>
@@ -133,7 +151,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
     // justifyContent: "flex-end",
-    // alignItems: "center",
+    alignItems: "center",
   },
   input: {
     borderWidth: 1,
@@ -143,7 +161,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   form: {
-    marginHorizontal: 40,
+    // marginHorizontal: 40,
   },
   inputTitle: {
     color: "#FFFFFF",
