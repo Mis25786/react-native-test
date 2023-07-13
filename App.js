@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useFonts } from "expo-font";
+//* import * as Font from "expo-font";
+//* import { AppLoading } from "expo";
 import {
   Platform,
   ImageBackground,
@@ -17,18 +20,40 @@ const initialState = {
   password: "",
 };
 
+//* const loadApplication = async () => {
+//*   await Font.loadAsync({
+//*     "DMMono-Regular": require("./assets/Fonts/DMMono-Regular.ttf"),
+//*   });
+//* };
+
 export default function App() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-  // console.log(isShowKeyboard);
   const [state, setstate] = useState(initialState);
-  // console.log(state);
+  //* const [iasReady, setIasReady] = useState(false);
+  const [fontsLoaded] = useFonts({
+    "DMMono-Regular": require("./assets/Fonts/DMMono-Regular.ttf"),
+    "DMMono-Medium": require("./assets/Fonts/DMMono-Medium.ttf"),
+    "DMMono-Light": require("./assets/Fonts/DMMono-Light.ttf"),
+  });
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);
     setstate(initialState);
   };
+
+  //* if (!iasReady) {
+  //*   return (
+  //*     <AppLoading
+  //*       startAsync={loadApplication}
+  //*       onFinish={() => setIasReady(true)}
+  //*       onError={console.warn}
+  //*     />
+  //*   );
+  //* }
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
@@ -70,7 +95,10 @@ export default function App() {
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.password}
                   onChangeText={(value) =>
-                    setstate((prevState) => ({ ...prevState, password: value }))
+                    setstate((prevState) => ({
+                      ...prevState,
+                      password: value,
+                    }))
                   }
                 />
               </View>
@@ -151,6 +179,7 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   headerTitle: {
+    fontFamily: "DMMono-Regular",
     fontSize: 30,
     color: "#FFFFFF",
   },
