@@ -15,6 +15,32 @@ import ProfileScreen from "./screens/mainScreen/ProfileScreen";
 const AuthStack = createNativeStackNavigator();
 const MainTab = createBottomTabNavigator();
 
+const useRoute = (isAuth) => {
+  if (!isAuth) {
+    return (
+      <AuthStack.Navigator>
+        <AuthStack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        <AuthStack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{ headerShown: false }}
+        />
+      </AuthStack.Navigator>
+    );
+  }
+  return (
+    <MainTab.Navigator>
+      <MainTab.Screen name="Posts" component={PostsScreen} />
+      <MainTab.Screen name="Create" component={CreateScreen} />
+      <MainTab.Screen name="Profile" component={ProfileScreen} />
+    </MainTab.Navigator>
+  );
+};
+
 //* const loadApplication = async () => {
 //*   await Font.loadAsync({
 //*     "DMMono-Regular": require("./assets/Fonts/DMMono-Regular.ttf"),
@@ -28,6 +54,7 @@ export default function App() {
     "DMMono-Medium": require("./assets/Fonts/DMMono-Medium.ttf"),
     "DMMono-Light": require("./assets/Fonts/DMMono-Light.ttf"),
   });
+  const routing = useRoute(null);
 
   //* if (!iasReady) {
   //*   return (
@@ -42,28 +69,5 @@ export default function App() {
     return null;
   }
 
-  return (
-    <NavigationContainer>
-      <MainTab.Navigator>
-        <MainTab.Screen name="Posts" component={PostsScreen} />
-        <MainTab.Screen name="Create" component={CreateScreen} />
-        <MainTab.Screen name="Profile" component={ProfileScreen} />
-      </MainTab.Navigator>
-    </NavigationContainer>
-  );
+  return <NavigationContainer>{routing}</NavigationContainer>;
 }
-
-// auth
-
-// <AuthStack.Navigator>
-//   <AuthStack.Screen
-//     name="Login"
-//     component={LoginScreen}
-//     options={{ headerShown: false }}
-//   />
-//   <AuthStack.Screen
-//     name="Register"
-//     component={RegisterScreen}
-//     options={{ headerShown: false }}
-//   />
-// </AuthStack.Navigator>;
