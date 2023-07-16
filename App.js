@@ -4,11 +4,13 @@ import { useFonts } from "expo-font";
 //* import { AppLoading } from "expo";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import LoginScreen from "./screens/auth/LoginScreen";
 import RegisterScreen from "./screens/auth/RegisterScreen";
 
 const AuthStack = createNativeStackNavigator();
+const MainTab = createBottomTabNavigator();
 
 //* const loadApplication = async () => {
 //*   await Font.loadAsync({
