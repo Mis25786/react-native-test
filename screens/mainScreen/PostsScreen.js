@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 const PostsScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>ProfileScreen</Text>
+      <Text>PostsScreen</Text>
     </View>
   );
 };
