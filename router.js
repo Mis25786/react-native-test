@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useFonts } from "expo-font";
-//* import * as Font from "expo-font";
-//* import { AppLoading } from "expo";
-import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -15,15 +12,7 @@ import ProfileScreen from "./screens/mainScreen/ProfileScreen";
 const AuthStack = createNativeStackNavigator();
 const MainTab = createBottomTabNavigator();
 
-// import { useRoute } from "./router";
-
-//* const loadApplication = async () => {
-//*   await Font.loadAsync({
-//*     "DMMono-Regular": require("./assets/Fonts/DMMono-Regular.ttf"),
-//*   });
-//* };
-
-const useRoute = (isAuth) => {
+export const useRoute = (isAuth) => {
   if (!isAuth) {
     return (
       <AuthStack.Navigator>
@@ -48,28 +37,3 @@ const useRoute = (isAuth) => {
     </MainTab.Navigator>
   );
 };
-
-export default function App() {
-  //* const [iasReady, setIasReady] = useState(false);
-  const [fontsLoaded] = useFonts({
-    "DMMono-Regular": require("./assets/Fonts/DMMono-Regular.ttf"),
-    "DMMono-Medium": require("./assets/Fonts/DMMono-Medium.ttf"),
-    "DMMono-Light": require("./assets/Fonts/DMMono-Light.ttf"),
-  });
-  const routing = useRoute(null);
-
-  //* if (!iasReady) {
-  //*   return (
-  //*     <AppLoading
-  //*       startAsync={loadApplication}
-  //*       onFinish={() => setIasReady(true)}
-  //*       onError={console.warn}
-  //*     />
-  //*   );
-  //* }
-  if (!fontsLoaded) {
-    return null;
-  }
-
-  return <NavigationContainer>{routing}</NavigationContainer>;
-}
