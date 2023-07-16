@@ -12,6 +12,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Dimensions,
+  Button,
 } from "react-native";
 
 const initialState = {
@@ -20,7 +21,9 @@ const initialState = {
   nickname: "",
 };
 
-export default function RegisterScreen() {
+export default function RegisterScreen({ navigation }) {
+  //   console.log("navigation", navigation);
+
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
   const [dimensions, setDimensions] = useState(
@@ -105,12 +108,23 @@ export default function RegisterScreen() {
                   }
                 />
               </View>
+
               <TouchableOpacity
                 style={styles.btn}
                 activeOpacity={0.8}
                 onPress={keyboardHide}
               >
                 <Text style={styles.btnTitle}>SIGN IN</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.navBtn}
+                onPress={() => navigation.navigate("Login")}
+              >
+                <Text style={styles.navBtnTitleText}>
+                  You are already registered?{" "}
+                  <Text style={styles.navBtnTitle}>Go to login</Text>
+                </Text>
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
@@ -185,5 +199,15 @@ const styles = StyleSheet.create({
     fontFamily: "DMMono-Regular",
     fontSize: 30,
     color: "#FFFFFF",
+  },
+  navBtn: {
+    marginTop: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  navBtnTitleText: { color: "#00FF00", fontSize: 10 },
+  navBtnTitle: {
+    color: "#FFFFFF",
+    fontSize: 20,
   },
 });
